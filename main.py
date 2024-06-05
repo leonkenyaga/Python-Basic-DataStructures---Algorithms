@@ -15,6 +15,7 @@ class binary_search_tree:
         #If there is no root node add the the passed element as the value of the root node
         if self.root==None:
             self.root = node(value)
+            print("inserted", value)
         else:
             self.__insert(value, self.root)
     # The private version (recursive) of the BST class insert method
@@ -24,7 +25,7 @@ class binary_search_tree:
             #Check if the currentNode has a left child
             if currentNode.left_child == None:
                 #if it doesn't insert a node with the parsed value
-                currentNode.left_child == node(value)
+                currentNode.left_child = node(value)
                 print("inserted", value)
             #Otherwise call the __insert method recursively on the left child
             else:
@@ -34,12 +35,11 @@ class binary_search_tree:
             #Check if the currentNode has a right child
             if currentNode.right_child == None:
                 #if it doesn't insert a node with the parsed value
-                currentNode.right_child == node(value)
+                currentNode.right_child = node(value)
                 print("inserted", value)
             #Otherwise call the __insert method recursively on the right child
             else:
                 self.__insert(value, currentNode.right_child)
-                print("inserted", value)
 
         else:
             print ("Value already in tree!")
@@ -51,8 +51,20 @@ class binary_search_tree:
     def __printtree(self, currentNode):
         if currentNode!=None:
             self.__printtree(currentNode.left_child)
-            print (currentNode.value)
+            print ("printing node:  ", currentNode.value)
             self.__printtree(currentNode.right_child)
+    def height(self):
+       if self.root!=None:
+        return self._height(self.root,0)
+       else:
+        return 0
+    def _height(self,cur_node,cur_height):
+        if cur_node==None: return cur_height
+        left_height=self._height(cur_node.left_child,cur_height+1)
+        right_height=self._height(cur_node.right_child,cur_height+1)
+        return max(left_height,right_height)
+        
+
 
 def fill_tree(tree, num_elems=10, max_int = 100):
     from random import randint
@@ -65,7 +77,7 @@ tree = binary_search_tree()
 tree = fill_tree(tree)
 tree.printtree()
 
-
+print("tree height is: ", tree.height())
             
 
 
