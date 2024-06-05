@@ -58,15 +58,39 @@ class binary_search_tree:
         return self._height(self.root,0)
        else:
         return 0
-    def _height(self,cur_node,cur_height):
-        if cur_node==None: return cur_height
-        left_height=self._height(cur_node.left_child,cur_height+1)
-        right_height=self._height(cur_node.right_child,cur_height+1)
+       
+    def _height(self,currentNode,currentheight):
+        if currentNode==None: return currentheight -1
+        left_height=self._height(currentNode.left_child,currentheight+1)
+        right_height=self._height(currentNode.right_child,currentheight+1)
         return max(left_height,right_height)
+    
+    def search(self, value):
+        if self.root!=None:
+            return self.__search(value, self.root)
+        else:
+            return False
+    
+    def __search(self, value, currentNode):
+        if currentNode!=None:
+ 
+            if value < currentNode.value:
+               return self.__search(value, currentNode.left_child)
+
+            elif value > currentNode.value:
+               return self.__search(value, currentNode.right_child)
+            
+            else:
+                return True
+        
+        else:
+            return False
+
+
         
 
 
-def fill_tree(tree, num_elems=10, max_int = 100):
+def fill_tree(tree, num_elems=7, max_int = 10):
     from random import randint
     for i in range(num_elems):
         cur_elem = randint(0, max_int)
@@ -77,8 +101,7 @@ tree = binary_search_tree()
 tree = fill_tree(tree)
 tree.printtree()
 
-print("tree height is: ", tree.height())
-            
+print(tree.search(0))
 
 
 
