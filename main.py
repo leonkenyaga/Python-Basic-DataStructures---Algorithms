@@ -6,7 +6,7 @@ class node:
         self.left_child= None
 
 #Binary Search Tree class 
-class binary_search_tree:
+class AVLTree:
     def __init__(self):
         self.root= None
 
@@ -97,13 +97,8 @@ def fill_tree(tree, num_elems=7, max_int = 10):
         tree.insert(cur_elem)
     return tree
 
-tree = binary_search_tree()
+tree = AVLTree()
 tree = fill_tree(tree)
 tree.printtree()
 
 print(tree.search(0))
-
-
-
-
-
